@@ -1,19 +1,18 @@
-# Python 環境與快取
-__pycache__/
-*.pyc
+# Python 虛擬環境
 .venv/
 venv/
+env/
 
-# PyInstaller 打包生成的暫存與結果
+# 打包與快取檔案
 build/
 dist/
+__pycache__/
 *.spec
-warn-AutoSRT.txt
+*.pyc
 
-# 影音檔與測試用的字幕檔
-*.mp3
+# 測試用的影音與字幕檔 (避免不小心傳上 GitHub)
 *.mp4
+*.mp3
 *.wav
-
-# Mac 系統隱藏檔
-.DS_Store
+*.srt
+*.txt

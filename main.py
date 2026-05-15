@@ -131,7 +131,7 @@ def auto_generate_srt(audio_path: str, raw_text_path: str, output_srt_path: str)
         srt_content += f"{buffered_sentence['idx']}\n{format_timestamp(buffered_sentence['start'])} --> {format_timestamp(buffered_sentence['end'])}\n{buffered_sentence['text']}\n\n"
 
     with open(output_srt_path, 'w', encoding='utf-8') as f:
-        f.write(srt_content.strip())
+        f.write(srt_content)
         
     print(f"🎉 任務完成！SRT 已順利儲存至：{output_srt_path}")
 
