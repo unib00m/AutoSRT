@@ -50,8 +50,8 @@ def auto_generate_srt(audio_path: str, raw_text_path: str, output_srt_path: str)
     
     for w in flat_words:
         if current_start is None:
-            # 統一讓起點微幅提早 0.05 秒，但絕對不能早於上一句的結束時間，避免重疊！
-            current_start = max(last_end_time + 0.001, w.start - 0.05)
+            # 統一讓起點微幅提早 0.15 秒 (增加人類視覺緩衝時間)，但絕對不能早於上一句的結束時間，避免重疊！
+            current_start = max(last_end_time + 0.001, w.start - 0.15)
             
         clean_word = w.word.replace(separator, '').strip()
         has_speech = any(c.isalnum() for c in clean_word)
