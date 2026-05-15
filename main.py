@@ -22,13 +22,13 @@ def auto_generate_srt(audio_path: str, raw_text_path: str, output_srt_path: str)
     with open(raw_text_path, 'r', encoding='utf-8') as f:
         original_lines = [line.strip() for line in f.readlines() if line.strip()]
     
-    # 使用特殊符號作為強制斷句的錨點，避免換行符號被 AI 忽略
-    separator = '█'
+    # 改用常見的 ASCII 符號作為錨點，降低 AI 遇到「外星符號」時的崩潰機率
+    separator = '|'
     transcript_text = separator.join(original_lines) + separator
     
     print("步驟 2/4：載入模型...")
-    # 升級為 'small' 模型：雖然慢一點點，但能大幅降低 AI 在無聲區間產生「幻覺」的機率
-    model = stable_whisper.load_model('small')
+    # 使用 'medium' 模型：在速度與精準度之間取得絕佳平衡
+    model = stable_whisper.load_model('large-v2')
     
     print("步驟 3/4：強制對齊...")
     result = model.align(audio_path, transcript_text, language='zh', vad=True)
