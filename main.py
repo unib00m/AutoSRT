@@ -24,7 +24,12 @@ def auto_generate_srt(audio_path: str, raw_text_path: str, output_srt_path: str)
     
     # 改用常見的 ASCII 符號作為錨點，降低 AI 遇到「外星符號」時的崩潰機率
     separator = '|'
-    transcript_text = separator.join(original_lines) + separator
+    
+    # 【全新解法：假餌戰術】
+    # 我們在整段文字最後面，故意多加一個「[END]」當作假餌。
+    # DTW 演算法會強迫症發作，把這個 [END] 拉長到影片的最後一毫秒。
+    # 而我們「真正的最後一句話」就能擺脫拖尾宿命，獲得精準的結束時間！
+    transcript_text = separator.join(original_lines) + separator + " [END]" + separator
     
     print("步驟 2/4：載入模型...")
     # 使用 'medium' 模型：在速度與精準度之間取得絕佳平衡
